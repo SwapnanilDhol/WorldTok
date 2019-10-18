@@ -12,13 +12,17 @@ import MapKit
 class HomeScreen: UITableViewController {
     
     let reuseIdentifier  = "timeCell"
-    var timeZones = ["GMT", "Europe/Paris", "Asia/Dubai", "Europe/Dublin", "America/New_York", "Australia/Adelaide", "Asia/Kolkata"]
+    var timeZones = UserDefaults.standard.value(forKey: "selectedTimeZones") as? [String] ?? ["Europe/Paris", "Asia/Dubai"]
+    let generator = UIImpactFeedbackGenerator()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController!.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-Medium", size: 45)!]
         self.navigationController!.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-Medium", size: 20)!]
         requestNotificationPermission()
+       // networkRequest()
+        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Edit", style: UIBarButtonItem.Style.plain, target: self, action: #selector(editButtonPressed))
         
        
     }
@@ -30,29 +34,25 @@ class HomeScreen: UITableViewController {
 
     // MARK: - Table view data source
     
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        
-        return 1
-    }
+    override func numberOfSections(in tableView: UITableView) -> Int { 1 }
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return timeZones.count
-    }
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { timeZones.count }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! TimeTableViewCell
-        cell.cityLabel.text = timeZones[indexPath.row]
-        return cell
+
+            let cell = tableView.dequeueReusableCell(withIdentifier: "timeCell", for: indexPath) as! TimeTableViewCell
+            cell.cityLabel.text = timeZones[indexPath.row]
+            return cell
+        
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.performSegue(withIdentifier: "showTimeSegue", sender: self)
+        generator.impactOccurred()
         tableView.deselectRow(at: indexPath, animated: true)
     }
    
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return true
-    }
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool { true }
 
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if (editingStyle == .delete) {
@@ -64,6 +64,17 @@ class HomeScreen: UITableViewController {
             
         }
     }
+    
+ @objc func editButtonPressed(){
+     tableView.setEditing(!tableView.isEditing, animated: true)
+     if tableView.isEditing == true{
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Done", style: UIBarButtonItem.Style.plain, target: self, action: #selector(editButtonPressed))
+     }else{
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Edit", style: UIBarButtonItem.Style.plain, target: self, action: #selector(editButtonPressed))
+     }
+ }
+    
+    
  
 }
 

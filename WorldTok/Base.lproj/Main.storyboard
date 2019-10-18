@@ -3,6 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -13,7 +14,7 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="VvA-Ei-48h">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemGroupedBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="timeCell" rowHeight="150" id="0si-Er-QiK" customClass="TimeTableViewCell" customModule="WorldTok" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="414" height="150"/>
@@ -22,8 +23,8 @@
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="150"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="18:54:55" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="d4Y-9c-kqo">
-                                            <rect key="frame" x="246" y="21" width="148" height="108"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading..." textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="d4Y-9c-kqo">
+                                            <rect key="frame" x="220" y="21" width="174" height="108"/>
                                             <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="38"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -65,6 +66,7 @@
                                 </connections>
                             </tableViewCell>
                         </prototypes>
+                        <sections/>
                         <connections>
                             <outlet property="dataSource" destination="OIp-9e-W0B" id="DfC-90-P5W"/>
                             <outlet property="delegate" destination="OIp-9e-W0B" id="iPH-2J-7et"/>
@@ -73,12 +75,134 @@
                     <navigationItem key="navigationItem" title="World Tok" id="YYS-Fl-ySR">
                         <barButtonItem key="rightBarButtonItem" title="Item" image="plus.circle" catalog="system" id="9AN-pQ-3fR">
                             <color key="tintColor" systemColor="systemPurpleColor" red="0.68627450980000004" green="0.32156862749999998" blue="0.87058823529999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <segue destination="ypg-HD-pjw" kind="show" id="ySE-bz-Sh1"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="AYO-d8-ol8" kind="show" identifier="showTimeSegue" id="M83-TS-Y83"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="org-bm-SU7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1065.217391304348" y="110.49107142857143"/>
+        </scene>
+        <!--Seaching Cities-->
+        <scene sceneID="L7G-LA-ZVX">
+            <objects>
+                <tableViewController id="ypg-HD-pjw" customClass="SeachingCities" customModule="WorldTok" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="CGJ-Lk-22w">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" textLabel="eFD-Sj-Gg8" detailTextLabel="gaH-tX-reX" style="IBUITableViewCellStyleSubtitle" id="jpy-Kg-AcV">
+                                <rect key="frame" x="0.0" y="28" width="414" height="78.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="jpy-Kg-AcV" id="cTK-Mr-val">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="78.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="eFD-Sj-Gg8">
+                                            <rect key="frame" x="20" y="16" width="49.5" height="30"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="25"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="gaH-tX-reX">
+                                            <rect key="frame" x="20" y="46" width="51.5" height="17.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="ypg-HD-pjw" id="RRQ-Yy-l8a"/>
+                            <outlet property="delegate" destination="ypg-HD-pjw" id="16k-l9-vHE"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="rZa-Ws-oks"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8ix-Qy-iuR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1065" y="846"/>
+        </scene>
+        <!--City Time Screen-->
+        <scene sceneID="W38-1t-375">
+            <objects>
+                <viewController id="AYO-d8-ol8" customClass="CityTimeScreen" customModule="WorldTok" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="3EK-9G-V6A">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Vfq-0k-KPV">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="350"/>
+                            </mapView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="49e-oA-CcD">
+                                <rect key="frame" x="47" y="611" width="320" height="251"/>
+                                <subviews>
+                                    <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="WEy-u4-bEs">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="216"/>
+                                    </datePicker>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BAX-4i-14z">
+                                        <rect key="frame" x="100.5" y="221" width="119" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="15"/>
+                                        <state key="normal" title="Set Notification"/>
+                                        <connections>
+                                            <action selector="setNotification:" destination="AYO-d8-ol8" eventType="touchUpInside" id="O7D-RF-WQ2"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="ofv-wA-KGd">
+                                <rect key="frame" x="77" y="388" width="260.5" height="120.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="05:12 PM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fG7-LG-85V">
+                                        <rect key="frame" x="0.0" y="0.0" width="260.5" height="72"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="60"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mumbai" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gSW-Kh-ZZS">
+                                        <rect key="frame" x="71" y="80" width="118" height="40.5"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="34"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="ofv-wA-KGd" firstAttribute="centerY" secondItem="3EK-9G-V6A" secondAttribute="centerY" id="ELs-8A-8eW"/>
+                            <constraint firstItem="Vfq-0k-KPV" firstAttribute="leading" secondItem="wBk-nX-Owo" secondAttribute="leading" id="IeN-Ir-7ug"/>
+                            <constraint firstItem="Vfq-0k-KPV" firstAttribute="trailing" secondItem="wBk-nX-Owo" secondAttribute="trailing" id="K8y-5a-bAQ"/>
+                            <constraint firstItem="ofv-wA-KGd" firstAttribute="top" secondItem="Vfq-0k-KPV" secondAttribute="bottom" constant="38" id="Ysq-lE-OxS"/>
+                            <constraint firstItem="Vfq-0k-KPV" firstAttribute="top" secondItem="3EK-9G-V6A" secondAttribute="top" id="bmn-76-U4J"/>
+                            <constraint firstItem="49e-oA-CcD" firstAttribute="bottom" secondItem="wBk-nX-Owo" secondAttribute="bottom" id="eil-Ze-KK9"/>
+                            <constraint firstItem="wBk-nX-Owo" firstAttribute="trailing" secondItem="49e-oA-CcD" secondAttribute="trailing" constant="47" id="hGK-gj-8tE"/>
+                            <constraint firstItem="ofv-wA-KGd" firstAttribute="centerX" secondItem="3EK-9G-V6A" secondAttribute="centerX" id="kK3-bG-Ssq"/>
+                            <constraint firstItem="49e-oA-CcD" firstAttribute="leading" secondItem="wBk-nX-Owo" secondAttribute="leading" constant="47" id="pbR-CJ-1gQ"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="wBk-nX-Owo"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="iS3-hW-hy1"/>
+                    <connections>
+                        <outlet property="cityLabel" destination="gSW-Kh-ZZS" id="2ug-nZ-CYO"/>
+                        <outlet property="mapView" destination="Vfq-0k-KPV" id="db4-OZ-ZVQ"/>
+                        <outlet property="timeLabel" destination="fG7-LG-85V" id="3VW-Hd-6iE"/>
+                        <outlet property="timePicker" destination="WEy-u4-bEs" id="MdS-W6-Ley"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZYO-I1-mNK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1705.7971014492755" y="108.48214285714285"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ajt-go-jYU">

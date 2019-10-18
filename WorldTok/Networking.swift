@@ -11,6 +11,8 @@ import SwiftyJSON
 
 extension HomeScreen
 {
+    // TimeModelz(region: "", timeZoneCode: "", cityName: "")
+    
     func networkRequest()
     {
         let url = Bundle.main.url(forResource: "Timezones", withExtension: "json")
@@ -19,7 +21,16 @@ extension HomeScreen
             switch response.result
             {
             case .success(let value):
-                print(value)
+               let json = JSON(value)
+               for index in 0...9
+               {
+                 
+                for jndex in 0...json[index]["zones"].array!.count - 1
+                {
+                  //  print("TimeModelz(region: \"\(json[index]["group"].stringValue)\", timeZoneCode: \"\(json[index]["zones"][jndex]["value"].stringValue)\", cityName: \"\(json[index]["zones"][jndex]["name"].stringValue)\"), ")
+                   
+                }
+                }
             case .failure(let error):
                 print(error.localizedDescription)
             }
