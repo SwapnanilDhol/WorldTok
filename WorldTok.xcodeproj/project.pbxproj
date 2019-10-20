@@ -15,11 +15,10 @@
 		4496DC2C2358B4B900AF1456 /* HomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4496DC2B2358B4B900AF1456 /* HomeScreen.swift */; };
 		4496DC2E2358D36800AF1456 /* TimeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4496DC2D2358D36800AF1456 /* TimeTableViewCell.swift */; };
 		4496DC302358D41400AF1456 /* ContextMenuExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4496DC2F2358D41400AF1456 /* ContextMenuExtension.swift */; };
-		4496DC322358DB4F00AF1456 /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4496DC312358DB4F00AF1456 /* Networking.swift */; };
-		4496DC342358DB9B00AF1456 /* Timezones.json in Resources */ = {isa = PBXBuildFile; fileRef = 4496DC332358DB9B00AF1456 /* Timezones.json */; };
 		4496DC362359BF7500AF1456 /* CityTimeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4496DC352359BF7500AF1456 /* CityTimeScreen.swift */; };
-		4496DC5C235A394C00AF1456 /* Time Zone Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4496DC5B235A394C00AF1456 /* Time Zone Model.swift */; };
-		4496DC5E235A39EF00AF1456 /* Seaching Cities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4496DC5D235A39EF00AF1456 /* Seaching Cities.swift */; };
+		44A240FD235B92E8002E8783 /* UserDefaultsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A240FC235B92E8002E8783 /* UserDefaultsExtension.swift */; };
+		44A24102235CE34D002E8783 /* MapBackgroundViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A24101235CE34D002E8783 /* MapBackgroundViewController.swift */; };
+		44A24104235CE39F002E8783 /* LocationSearchTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A24103235CE39F002E8783 /* LocationSearchTable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,11 +32,10 @@
 		4496DC2B2358B4B900AF1456 /* HomeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreen.swift; sourceTree = "<group>"; };
 		4496DC2D2358D36800AF1456 /* TimeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTableViewCell.swift; sourceTree = "<group>"; };
 		4496DC2F2358D41400AF1456 /* ContextMenuExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContextMenuExtension.swift; sourceTree = "<group>"; };
-		4496DC312358DB4F00AF1456 /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
-		4496DC332358DB9B00AF1456 /* Timezones.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Timezones.json; sourceTree = "<group>"; };
 		4496DC352359BF7500AF1456 /* CityTimeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityTimeScreen.swift; sourceTree = "<group>"; };
-		4496DC5B235A394C00AF1456 /* Time Zone Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Time Zone Model.swift"; sourceTree = "<group>"; };
-		4496DC5D235A39EF00AF1456 /* Seaching Cities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Seaching Cities.swift"; sourceTree = "<group>"; };
+		44A240FC235B92E8002E8783 /* UserDefaultsExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsExtension.swift; sourceTree = "<group>"; };
+		44A24101235CE34D002E8783 /* MapBackgroundViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapBackgroundViewController.swift; sourceTree = "<group>"; };
+		44A24103235CE39F002E8783 /* LocationSearchTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchTable.swift; sourceTree = "<group>"; };
 		90BFA9E29A36F7863AAB21B6 /* Pods-WorldTok.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WorldTok.debug.xcconfig"; path = "Target Support Files/Pods-WorldTok/Pods-WorldTok.debug.xcconfig"; sourceTree = "<group>"; };
 		F4C1C5AA9C5654799EF13E7A /* Pods_WorldTok.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WorldTok.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -77,6 +75,7 @@
 		4496DC162358B36000AF1456 /* WorldTok */ = {
 			isa = PBXGroup;
 			children = (
+				44A24100235CE1C4002E8783 /* SearchControllers */,
 				4496DC5A235A393A00AF1456 /* Models */,
 				4496DC172358B36000AF1456 /* AppDelegate.swift */,
 				4496DC2B2358B4B900AF1456 /* HomeScreen.swift */,
@@ -85,10 +84,6 @@
 				4496DC202358B36400AF1456 /* Assets.xcassets */,
 				4496DC222358B36400AF1456 /* LaunchScreen.storyboard */,
 				4496DC252358B36400AF1456 /* Info.plist */,
-				4496DC312358DB4F00AF1456 /* Networking.swift */,
-				4496DC332358DB9B00AF1456 /* Timezones.json */,
-				4496DC5B235A394C00AF1456 /* Time Zone Model.swift */,
-				4496DC5D235A39EF00AF1456 /* Seaching Cities.swift */,
 			);
 			path = WorldTok;
 			sourceTree = "<group>";
@@ -96,8 +91,18 @@
 		4496DC5A235A393A00AF1456 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				44A240FC235B92E8002E8783 /* UserDefaultsExtension.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		44A24100235CE1C4002E8783 /* SearchControllers */ = {
+			isa = PBXGroup;
+			children = (
+				44A24101235CE34D002E8783 /* MapBackgroundViewController.swift */,
+				44A24103235CE39F002E8783 /* LocationSearchTable.swift */,
+			);
+			path = SearchControllers;
 			sourceTree = "<group>";
 		};
 		855385AAA8EFE2942008AC87 /* Frameworks */ = {
@@ -177,7 +182,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4496DC342358DB9B00AF1456 /* Timezones.json in Resources */,
 				4496DC242358B36400AF1456 /* LaunchScreen.storyboard in Resources */,
 				4496DC212358B36400AF1456 /* Assets.xcassets in Resources */,
 				4496DC1F2358B36000AF1456 /* Main.storyboard in Resources */,
@@ -233,14 +237,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				44A24102235CE34D002E8783 /* MapBackgroundViewController.swift in Sources */,
 				4496DC302358D41400AF1456 /* ContextMenuExtension.swift in Sources */,
-				4496DC322358DB4F00AF1456 /* Networking.swift in Sources */,
 				4496DC2C2358B4B900AF1456 /* HomeScreen.swift in Sources */,
-				4496DC5E235A39EF00AF1456 /* Seaching Cities.swift in Sources */,
+				44A24104235CE39F002E8783 /* LocationSearchTable.swift in Sources */,
 				4496DC362359BF7500AF1456 /* CityTimeScreen.swift in Sources */,
 				4496DC182358B36000AF1456 /* AppDelegate.swift in Sources */,
 				4496DC2E2358D36800AF1456 /* TimeTableViewCell.swift in Sources */,
-				4496DC5C235A394C00AF1456 /* Time Zone Model.swift in Sources */,
+				44A240FD235B92E8002E8783 /* UserDefaultsExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

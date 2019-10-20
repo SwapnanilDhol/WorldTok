@@ -76,45 +76,85 @@
                         <barButtonItem key="rightBarButtonItem" title="Item" image="plus.circle" catalog="system" id="9AN-pQ-3fR">
                             <color key="tintColor" systemColor="systemPurpleColor" red="0.68627450980000004" green="0.32156862749999998" blue="0.87058823529999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
-                                <segue destination="ypg-HD-pjw" kind="show" id="ySE-bz-Sh1"/>
+                                <action selector="searchButton:" destination="OIp-9e-W0B" id="tDC-GP-9HA"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <segue destination="AYO-d8-ol8" kind="show" identifier="showTimeSegue" id="M83-TS-Y83"/>
+                        <segue destination="v1v-Ks-mco" kind="show" identifier="searchSegue" id="f7C-Kp-Zf5"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="org-bm-SU7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1065.217391304348" y="110.49107142857143"/>
         </scene>
-        <!--Seaching Cities-->
-        <scene sceneID="L7G-LA-ZVX">
+        <!--Map Background Controller-->
+        <scene sceneID="ajO-y5-Fkt">
             <objects>
-                <tableViewController id="ypg-HD-pjw" customClass="SeachingCities" customModule="WorldTok" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="CGJ-Lk-22w">
+                <viewController id="4Rb-sx-shu" customClass="MapBackgroundController" customModule="WorldTok" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="FV3-U1-4W8">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" zoomEnabled="NO" rotateEnabled="NO" showsUserLocation="YES" showsBuildings="NO" showsCompass="NO" translatesAutoresizingMaskIntoConstraints="NO" id="77A-wA-7cN">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <connections>
+                                    <outlet property="delegate" destination="4Rb-sx-shu" id="t3t-AO-r1P"/>
+                                </connections>
+                            </mapView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="77A-wA-7cN" firstAttribute="top" secondItem="FV3-U1-4W8" secondAttribute="top" id="EY4-92-7Fs"/>
+                            <constraint firstAttribute="bottom" secondItem="77A-wA-7cN" secondAttribute="bottom" id="GRX-N0-cgQ"/>
+                            <constraint firstItem="aZe-Mx-FGO" firstAttribute="trailing" secondItem="77A-wA-7cN" secondAttribute="trailing" id="ZPu-Jd-pIG"/>
+                            <constraint firstItem="77A-wA-7cN" firstAttribute="leading" secondItem="aZe-Mx-FGO" secondAttribute="leading" id="qyB-Ms-RWM"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="aZe-Mx-FGO"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="Mp2-dL-7FK">
+                        <barButtonItem key="rightBarButtonItem" title="Done" style="done" id="tdM-kv-stQ">
+                            <connections>
+                                <action selector="dismissVc:" destination="4Rb-sx-shu" id="klN-ZJ-mo3"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="mapView" destination="77A-wA-7cN" id="4qp-4p-NXW"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="71c-ZA-XhA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1975.36231884058" y="787.5"/>
+        </scene>
+        <!--Location Search Table-->
+        <scene sceneID="E56-6t-uMC">
+            <objects>
+                <tableViewController storyboardIdentifier="LocationSearchTable" useStoryboardIdentifierAsRestorationIdentifier="YES" id="jSc-uM-hlZ" customClass="LocationSearchTable" customModule="WorldTok" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Pyb-IG-u6M">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" textLabel="eFD-Sj-Gg8" detailTextLabel="gaH-tX-reX" style="IBUITableViewCellStyleSubtitle" id="jpy-Kg-AcV">
-                                <rect key="frame" x="0.0" y="28" width="414" height="78.5"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" textLabel="M60-SA-hPd" detailTextLabel="RLi-ay-j6N" style="IBUITableViewCellStyleSubtitle" id="gXh-8u-hey">
+                                <rect key="frame" x="0.0" y="28" width="414" height="55.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="jpy-Kg-AcV" id="cTK-Mr-val">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="78.5"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gXh-8u-hey" id="Lb9-wv-yGU">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="55.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="eFD-Sj-Gg8">
-                                            <rect key="frame" x="20" y="16" width="49.5" height="30"/>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="M60-SA-hPd">
+                                            <rect key="frame" x="20" y="10" width="33.5" height="20.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="25"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="gaH-tX-reX">
-                                            <rect key="frame" x="20" y="46" width="51.5" height="17.5"/>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="RLi-ay-j6N">
+                                            <rect key="frame" x="20" y="31.5" width="44" height="14.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -123,15 +163,14 @@
                             </tableViewCell>
                         </prototypes>
                         <connections>
-                            <outlet property="dataSource" destination="ypg-HD-pjw" id="RRQ-Yy-l8a"/>
-                            <outlet property="delegate" destination="ypg-HD-pjw" id="16k-l9-vHE"/>
+                            <outlet property="dataSource" destination="jSc-uM-hlZ" id="xdl-Tj-cpU"/>
+                            <outlet property="delegate" destination="jSc-uM-hlZ" id="snc-Rh-62T"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="rZa-Ws-oks"/>
                 </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="8ix-Qy-iuR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WVm-xz-7gn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1065" y="846"/>
+            <point key="canvasLocation" x="2686.9565217391305" y="787.5"/>
         </scene>
         <!--City Time Screen-->
         <scene sceneID="W38-1t-375">
@@ -202,7 +241,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZYO-I1-mNK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1705.7971014492755" y="108.48214285714285"/>
+            <point key="canvasLocation" x="1778" y="110"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ajt-go-jYU">
@@ -221,6 +260,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tNX-MP-QgX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="155.07246376811597" y="110.49107142857143"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="haW-kc-SkV">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="fullScreen" id="v1v-Ks-mco" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="8c0-ck-td3"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="bbz-HG-go1">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="4Rb-sx-shu" kind="relationship" relationship="rootViewController" id="GX4-qz-leL"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MtV-BY-qIq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1065" y="911"/>
         </scene>
     </scenes>
     <resources>

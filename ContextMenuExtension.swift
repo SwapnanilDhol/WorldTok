@@ -19,7 +19,7 @@ extension HomeScreen
         let configuration = UIContextMenuConfiguration(identifier: nil, previewProvider: nil){ action in
                 let sendNotif = UIAction(title: "Send Notfication", image: UIImage(systemName: "eye.fill"), identifier: UIAction.Identifier(rawValue: "view")) {_ in
                     
-                    self.sendNotification(location: self.timeZones[indexPath.row], indexPath: indexPath.row)
+                    self.sendNotification(location: finalListOfTimes[indexPath.row], indexPath: indexPath.row)
                 }
                 return UIMenu(title: "Actions", image: nil, identifier: nil, children: [sendNotif])
             }
@@ -39,7 +39,7 @@ extension HomeScreen
         
         let formatter = DateFormatter()
                formatter.timeStyle = .long
-               formatter.timeZone = TimeZone(identifier: timeZones[indexPath])
+        formatter.timeZone = TimeZone(identifier: finalListOfTimes[indexPath])
                formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         
         let alertTime = formatter.string(from: Date())
