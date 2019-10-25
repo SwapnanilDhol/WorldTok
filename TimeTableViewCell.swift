@@ -9,21 +9,37 @@ class TimeTableViewCell : UITableViewCell
     @IBOutlet weak var cityLabel : UILabel!
     @IBOutlet weak var dayDifferenceLabel : UILabel!
     @IBOutlet weak var currentTimeLabel : UILabel!
+    @IBOutlet weak var timeZoneLabel: UILabel!
     
+    var timer = Timer()
    
     
     override func awakeFromNib() {
         super.awakeFromNib()
+
+        startTimer()
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
         
-        let timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(setTime), userInfo: nil, repeats: true)
-        RunLoop.current.add(timer, forMode: .common)
-        
+    }
+    
+    @objc func startTimer()
+    {
+        self.timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(self.setTime), userInfo: nil, repeats: true)
+        RunLoop.current.add(self.timer, forMode: .common)
+    }
+
+    
+    @objc func invalidateTimer()
+    {timer.invalidate()
     }
     
     @objc func setTime()
     {
         currentTimeLabel.text = getTime()
-        dayDifferenceLabel.text = checkTimeStampz()
+        dayDifferenceLabel.text = getDayDifference()
         
     }
     
@@ -34,34 +50,33 @@ class TimeTableViewCell : UITableViewCell
         if cityLabel.text != ""
         {
             let formatter = DateFormatter()
-            formatter.timeStyle = .long
-            formatter.timeZone = TimeZone(identifier: cityLabel.text!)
+            formatter.timeStyle = .short
+            formatter.timeZone = TimeZone(identifier: timeZoneLabel.text!)
+            
             
             let timeNow = Date()
             timeString = formatter.string(from: timeNow)
               
         }
-        let time = timeString.strstr(needle: "M",beforeNeedle: true)
-        let gmtDifference = timeString.strstr(needle: "M")
-        
-        timeString = (time ?? "Nil") + "M\n" + (gmtDifference ?? "Nil")
-        
         return timeString
     }
+    
+
     
     func getDayDifference() -> String
     {
         let timeNow = Date()
         
         let dateFormatter = DateFormatter()
-        dateFormatter.timeZone = TimeZone(identifier: cityLabel.text!)
-        dateFormatter.dateFormat = "dd-MM" //give the formate according to your need
+        dateFormatter.timeZone = TimeZone(identifier: timeZoneLabel.text!)
+        dateFormatter.dateFormat = "dd-MM-yyyy" //give the formate according to your need
 
         
         return dateFormatter.string(from: timeNow)
         
      
     }
+
     
     
     func checkTimeStampz() -> String{

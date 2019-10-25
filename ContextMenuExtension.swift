@@ -21,7 +21,28 @@ extension HomeScreen
                     
                     self.sendNotification(location: finalListOfTimes[indexPath.row], indexPath: indexPath.row)
                 }
-                return UIMenu(title: "Actions", image: nil, identifier: nil, children: [sendNotif])
+            let rename = UIAction(title: "Rename City", image: UIImage(systemName: "pencil"), identifier: UIAction.Identifier(rawValue: "view")) {_ in
+                
+                let alert = UIAlertController(title: "Rename ", message: "Rename City", preferredStyle: .alert)
+                alert.addTextField()
+                alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: { (_) in
+                    let answer = alert.textFields![0]
+                    
+                    if answer.text != ""
+                    {
+                        cities[indexPath.row] = answer.text!
+                    }
+                    else
+                    {
+                        self.dismiss(animated: true, completion: nil)
+                    }
+                    tableView.reloadData()
+                }))
+                self.present(alert, animated: true, completion: nil)
+                
+                
+            }
+                return UIMenu(title: "Actions", image: nil, identifier: nil, children: [sendNotif,rename])
             }
             
             return configuration
@@ -72,5 +93,21 @@ extension HomeScreen
                 print("D'oh")
             }
         }
+    }
+}
+
+extension UILabel {
+
+    func startBlink() {
+        UIView.animate(withDuration: 0.8,
+              delay:0.0,
+              options:[.allowUserInteraction, .curveEaseInOut, .autoreverse, .repeat],
+              animations: { self.alpha = 0 },
+              completion: nil)
+    }
+
+    func stopBlink() {
+        layer.removeAllAnimations()
+        alpha = 1
     }
 }

@@ -14,6 +14,7 @@ class LocationSearchTable: UITableViewController {
 
     var matchingItems:[MKMapItem] = []
     var mapView: MKMapView? = nil
+    var handleMapSearchDelegate:HandleMapSearch? = nil
     
     
     override func viewDidLoad() {
@@ -74,7 +75,7 @@ extension LocationSearchTable : UISearchResultsUpdating {
             // state
             selectedItem.administrativeArea ?? ""
         )
-        print(addressLine)
+        
         return addressLine
     }
     
@@ -98,9 +99,11 @@ extension LocationSearchTable : UISearchResultsUpdating {
                 let timeString = formatter.string(from: timeNow)
                 print(timeString)
                 let tzString : String = "\(timeZone)"
-                finalListOfTimes.append(tzString.replacingOccurrences(of: " (fixed)", with: ""))
-                self.dismiss(animated: true, completion: nil)
+                let editedTime = tzString.replacingOccurrences(of: " (current)", with: "")
+                finalListOfTimes.append(editedTime.replacingOccurrences(of: " (fixed)", with: ""))
+                cities.append((placeMark.administrativeArea ?? "Unknown") + ", " + (placeMark.country ?? "Unknown"))
                 
+                 NotificationCenter.default.post(name: .init("dismissParent"), object: nil)
             }
         })
 
@@ -128,25 +131,29 @@ extension LocationSearchTable {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         tableView.deselectRow(at: indexPath, animated: true)
+        UINotificationFeedbackGenerator().notificationOccurred(.success)
         getCoordinateFrom(address: matchingItems[indexPath.row].placemark.name ?? "Moscow, Russia") { (locationCoordinates, error) in
             
             if error == nil
             {
                 self.convertLatLongToAddress(latitude: locationCoordinates!.latitude, longitude: locationCoordinates!.longitude)
             }
+            else
+            {print(error?.localizedDescription)}
         }
+
+        self.dismiss(animated: true, completion: nil)
        
-        
         
     }
     
     func getCoordinateFrom(address: String, completion: @escaping(_ coordinate: CLLocationCoordinate2D?, _ error: Error?) -> () ) {
                CLGeocoder().geocodeAddressString(address) { completion($0?.first?.location?.coordinate, $1) }
            }
-    
-    
 
+}
 
-    
+extension LocationSearchTable {
+
 }
 

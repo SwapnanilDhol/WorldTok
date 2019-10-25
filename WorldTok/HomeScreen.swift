@@ -9,31 +9,47 @@ import UIKit
 import MapKit
 
 var finalListOfTimes = ["Asia/Hong_Kong"]
+var cities = ["Hong Kong"]
 
 class HomeScreen: UITableViewController {
     
     let reuseIdentifier  = "timeCell"
     let generator = UIImpactFeedbackGenerator()
+    let timer = Timer()
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController!.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-Medium", size: 45)!]
-        self.navigationController!.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-Medium", size: 20)!]
         requestNotificationPermission()
 
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Edit", style: UIBarButtonItem.Style.plain, target: self, action: #selector(editButtonPressed))
         
-        print(finalListOfTimes.count)
+        self.refreshControl?.addTarget(self, action: #selector(refresh), for: UIControl.Event.valueChanged)
         
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadTableView), name: .init("dismissParent"), object: nil)
     }
     
     
     override func viewDidAppear(_ animated: Bool) {
+        
         tableView.reloadData()
         tableView.tableFooterView = UIView()
+
     }
     
+    @objc func reloadTableView()
+    {
+        tableView.reloadData()
+    }
+    
+    @objc func refresh(sender:AnyObject)
+    {
+        generator.impactOccurred()
+
+        self.tableView.reloadData()
+        self.refreshControl?.endRefreshing()
+    }
+
     
     @IBAction func searchButton(_ sender: UIBarButtonItem) {
         self.performSegue(withIdentifier: "searchSegue", sender: self)
@@ -49,16 +65,17 @@ class HomeScreen: UITableViewController {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "timeCell", for: indexPath) as! TimeTableViewCell
         
-        cell.cityLabel.text = finalListOfTimes[indexPath.row]
-        cell.dayDifferenceLabel.text = "Sup"
+        cell.cityLabel.text = cities[indexPath.row]
+        cell.timeZoneLabel.text = finalListOfTimes[indexPath.row]
+        cell.dayDifferenceLabel.text = "Loading"
         
         return cell
         
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-      //  self.performSegue(withIdentifier: "showTimeSegue", sender: self)
-        self.performSegue(withIdentifier: "searchSegue", sender: self)
+        self.performSegue(withIdentifier: "showTimeSegue", sender: self)
+       // self.performSegue(withIdentifier: "searchSegue", sender: self)
         generator.impactOccurred()
         tableView.deselectRow(at: indexPath, animated: true)
     }
@@ -68,7 +85,8 @@ class HomeScreen: UITableViewController {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if (editingStyle == .delete) {
             
-           // finalListOfTimes.remove(at: indexPath.row)
+            finalListOfTimes.remove(at: indexPath.row)
+            cities.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
             tableView.reloadData()
             
@@ -85,6 +103,29 @@ class HomeScreen: UITableViewController {
         }
     }
     
+    
+    
+}
+
+extension HomeScreen : UIAdaptivePresentationControllerDelegate {
+    public override func prepare(for segue: UIStoryboardSegue, sender: Any?)
+    {
+      if segue.identifier == "searchSegue" {
+        segue.destination.presentationController?.delegate = self;
+      }
+}
+    public func presentationControllerDidDismiss(
+      _ presentationController: UIPresentationController)
+    {
+         print(finalListOfTimes)
+        NotificationCenter.default.post(name: .init("startTimer"), object: nil)
+        self.tableView.reloadData()
+    }
+    
+    func presentationController(_ presentationController: UIPresentationController, willPresentWithAdaptiveStyle style: UIModalPresentationStyle, transitionCoordinator: UIViewControllerTransitionCoordinator?) {
+        
+        NotificationCenter.default.post(name: .init("invalidate"), object: nil)
+    }
     
     
 }
