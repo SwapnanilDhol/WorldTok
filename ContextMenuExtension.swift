@@ -42,7 +42,18 @@ extension HomeScreen
                 
                 
             }
-                return UIMenu(title: "Actions", image: nil, identifier: nil, children: [sendNotif,rename])
+            let addToFavourite = UIAction(title: "Add to Favourite", image: UIImage(systemName: "heart"), identifier: UIAction.Identifier(rawValue: "view")) {_ in
+                //TODO: Added to favourtiess Alert
+                self.favTimeZone = finalListOfTimes[indexPath.row]
+                self.favCity = cities[indexPath.row]
+                
+                UserDefaults.standard.set(finalListOfTimes[indexPath.row], forKey: "favTimeZone")
+                UserDefaults.standard.set(cities[indexPath.row], forKey: "favCity")
+                
+                self.tableView.reloadData()
+                
+            }
+            return UIMenu(title: "Actions", image: nil, identifier: nil, children: [sendNotif,rename])
             }
             
             return configuration

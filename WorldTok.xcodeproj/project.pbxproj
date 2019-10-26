@@ -16,10 +16,25 @@
 		4496DC2E2358D36800AF1456 /* TimeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4496DC2D2358D36800AF1456 /* TimeTableViewCell.swift */; };
 		4496DC302358D41400AF1456 /* ContextMenuExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4496DC2F2358D41400AF1456 /* ContextMenuExtension.swift */; };
 		4496DC362359BF7500AF1456 /* CityTimeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4496DC352359BF7500AF1456 /* CityTimeScreen.swift */; };
+		449A6878236492AA00ADD9EB /* SendTimeBasedNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449A6877236492AA00ADD9EB /* SendTimeBasedNotification.swift */; };
+		449A68A12364E94400ADD9EB /* 2222-slow-clock.json in Resources */ = {isa = PBXBuildFile; fileRef = 449A68A02364E94300ADD9EB /* 2222-slow-clock.json */; };
 		44A240FD235B92E8002E8783 /* UserDefaultsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A240FC235B92E8002E8783 /* UserDefaultsExtension.swift */; };
 		44A24102235CE34D002E8783 /* MapBackgroundViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A24101235CE34D002E8783 /* MapBackgroundViewController.swift */; };
 		44A24104235CE39F002E8783 /* LocationSearchTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A24103235CE39F002E8783 /* LocationSearchTable.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		449A68CB2364F36000ADD9EB /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		1D98B57D13F204D9DE032AD9 /* Pods-WorldTok.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WorldTok.release.xcconfig"; path = "Target Support Files/Pods-WorldTok/Pods-WorldTok.release.xcconfig"; sourceTree = "<group>"; };
@@ -33,6 +48,8 @@
 		4496DC2D2358D36800AF1456 /* TimeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTableViewCell.swift; sourceTree = "<group>"; };
 		4496DC2F2358D41400AF1456 /* ContextMenuExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContextMenuExtension.swift; sourceTree = "<group>"; };
 		4496DC352359BF7500AF1456 /* CityTimeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityTimeScreen.swift; sourceTree = "<group>"; };
+		449A6877236492AA00ADD9EB /* SendTimeBasedNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendTimeBasedNotification.swift; sourceTree = "<group>"; };
+		449A68A02364E94300ADD9EB /* 2222-slow-clock.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "2222-slow-clock.json"; sourceTree = "<group>"; };
 		44A240FC235B92E8002E8783 /* UserDefaultsExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsExtension.swift; sourceTree = "<group>"; };
 		44A24101235CE34D002E8783 /* MapBackgroundViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapBackgroundViewController.swift; sourceTree = "<group>"; };
 		44A24103235CE39F002E8783 /* LocationSearchTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchTable.swift; sourceTree = "<group>"; };
@@ -75,6 +92,7 @@
 		4496DC162358B36000AF1456 /* WorldTok */ = {
 			isa = PBXGroup;
 			children = (
+				449A689F2364E93800ADD9EB /* Files */,
 				44A24100235CE1C4002E8783 /* SearchControllers */,
 				4496DC5A235A393A00AF1456 /* Models */,
 				4496DC172358B36000AF1456 /* AppDelegate.swift */,
@@ -84,6 +102,7 @@
 				4496DC202358B36400AF1456 /* Assets.xcassets */,
 				4496DC222358B36400AF1456 /* LaunchScreen.storyboard */,
 				4496DC252358B36400AF1456 /* Info.plist */,
+				449A6877236492AA00ADD9EB /* SendTimeBasedNotification.swift */,
 			);
 			path = WorldTok;
 			sourceTree = "<group>";
@@ -94,6 +113,14 @@
 				44A240FC235B92E8002E8783 /* UserDefaultsExtension.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		449A689F2364E93800ADD9EB /* Files */ = {
+			isa = PBXGroup;
+			children = (
+				449A68A02364E94300ADD9EB /* 2222-slow-clock.json */,
+			);
+			path = Files;
 			sourceTree = "<group>";
 		};
 		44A24100235CE1C4002E8783 /* SearchControllers */ = {
@@ -134,6 +161,7 @@
 				4496DC112358B36000AF1456 /* Frameworks */,
 				4496DC122358B36000AF1456 /* Resources */,
 				7971516E20A374180EAAFD5E /* [CP] Embed Pods Frameworks */,
+				449A68CB2364F36000ADD9EB /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
@@ -185,6 +213,7 @@
 				4496DC242358B36400AF1456 /* LaunchScreen.storyboard in Resources */,
 				4496DC212358B36400AF1456 /* Assets.xcassets in Resources */,
 				4496DC1F2358B36000AF1456 /* Main.storyboard in Resources */,
+				449A68A12364E94400ADD9EB /* 2222-slow-clock.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -238,6 +267,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				44A24102235CE34D002E8783 /* MapBackgroundViewController.swift in Sources */,
+				449A6878236492AA00ADD9EB /* SendTimeBasedNotification.swift in Sources */,
 				4496DC302358D41400AF1456 /* ContextMenuExtension.swift in Sources */,
 				4496DC2C2358B4B900AF1456 /* HomeScreen.swift in Sources */,
 				44A24104235CE39F002E8783 /* LocationSearchTable.swift in Sources */,
@@ -392,6 +422,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = AE68R986VS;
 				INFOPLIST_FILE = WorldTok/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -411,6 +442,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = AE68R986VS;
 				INFOPLIST_FILE = WorldTok/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

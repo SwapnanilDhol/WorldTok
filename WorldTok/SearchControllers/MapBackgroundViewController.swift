@@ -114,7 +114,7 @@ extension MapBackgroundController : CLLocationManagerDelegate
 extension MapBackgroundController: HandleMapSearch {
     func currentTimeThere(timezone: String) {
         
-        print("HI")
+        
         
     }
     
@@ -132,7 +132,7 @@ extension MapBackgroundController: HandleMapSearch {
             annotation.subtitle = "\(city) \(state)"
         }
         mapView.addAnnotation(annotation)
-        let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
+        let span = MKCoordinateSpan(latitudeDelta: 0.10, longitudeDelta: 0.10)
         
         let region = MKCoordinateRegion(center: placemark.coordinate, span: span)
         mapView.setRegion(region, animated: true)
@@ -142,14 +142,15 @@ extension MapBackgroundController: HandleMapSearch {
 extension MapBackgroundController : MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView?{
         if annotation is MKUserLocation {
-            //return nil so map view draws "blue dot" for standard user location
+    
             return nil
         }
         let reuseId = "pin"
         var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKPinAnnotationView
         pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
-        pinView?.pinTintColor = .systemOrange
+        pinView?.pinTintColor = .systemRed
         pinView?.canShowCallout = true
+        
         let smallSquare = CGSize(width: 30, height: 30)
         let button = UIButton(frame: CGRect(origin: .zero, size: smallSquare))
         button.setBackgroundImage(UIImage(systemName: "plus"), for: .normal)
@@ -187,7 +188,7 @@ extension MapBackgroundController {
                   let timeNow = Date()
                 _ = formatter.string(from: timeNow)
                   
-                let ac = UIAlertController(title: "Do you want to add this?", message: "Do you want to add \((placeMark.administrativeArea) ?? "Unknown Area") who is following \((placeMark.timeZone) ?? TimeZone(identifier: "Asia/Kolkata"))", preferredStyle: .alert)
+                let ac = UIAlertController(title: "Do you want to add this?", message: "Do you want to add \((placeMark.administrativeArea) ?? "Unknown Area") who is following \(placeMark.timeZone ?? timeZone)", preferredStyle: .alert)
                 ac.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (_) in
                     let tzString : String = "\(timeZone)"
                     let editedTime = tzString.replacingOccurrences(of: " (current)", with: "")

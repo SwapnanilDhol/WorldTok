@@ -11,13 +11,13 @@
         <scene sceneID="z6R-cU-nNA">
             <objects>
                 <tableViewController id="OIp-9e-W0B" customClass="HomeScreen" customModule="WorldTok" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="VvA-Ei-48h">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="100" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="VvA-Ei-48h">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="timeCell" rowHeight="130" id="0si-Er-QiK" customClass="TimeTableViewCell" customModule="WorldTok" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="414" height="130"/>
+                                <rect key="frame" x="0.0" y="55.5" width="414" height="130"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0si-Er-QiK" id="qab-Ch-oVH">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="130"/>
@@ -59,6 +59,7 @@
                                             </variation>
                                         </stackView>
                                     </subviews>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                     <constraints>
                                         <constraint firstAttribute="bottomMargin" secondItem="fus-GZ-MFd" secondAttribute="bottom" constant="10" id="8v3-NY-iey"/>
                                         <constraint firstItem="fus-GZ-MFd" firstAttribute="leading" secondItem="qab-Ch-oVH" secondAttribute="leadingMargin" id="G0n-Vc-PtJ"/>
@@ -74,6 +75,67 @@
                                     <outlet property="currentTimeLabel" destination="d4Y-9c-kqo" id="6VM-av-bxX"/>
                                     <outlet property="dayDifferenceLabel" destination="g2g-f5-oFx" id="6gr-vZ-mgy"/>
                                     <outlet property="timeZoneLabel" destination="B4A-VB-eLK" id="iWs-bc-3Bi"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="favCell" rowHeight="130" id="uva-dK-K1Y" customClass="TimeTableViewCell" customModule="WorldTok" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="185.5" width="414" height="130"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="uva-dK-K1Y" id="DfL-gq-RkT">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="130"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading..." textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="sRw-vb-xt0">
+                                            <rect key="frame" x="257" y="46" width="138" height="38"/>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="32"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="top" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="jSD-84-s7d">
+                                            <rect key="frame" x="20" y="21" width="168.5" height="88"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Calcutta" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="11" translatesAutoresizingMaskIntoConstraints="NO" id="4W8-Aw-B45">
+                                                    <rect key="frame" x="0.0" y="0.0" width="85.5" height="42"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="22"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The Same day as you" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="YMf-jd-frS">
+                                                    <rect key="frame" x="0.0" y="46" width="168.5" height="42"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="18"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The Same day as you" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="XpX-zr-6PA">
+                                                    <rect key="frame" x="0.0" y="66.5" width="168.5" height="21.5"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="18"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <variation key="default">
+                                                <mask key="subviews">
+                                                    <exclude reference="XpX-zr-6PA"/>
+                                                </mask>
+                                            </variation>
+                                        </stackView>
+                                    </subviews>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                    <constraints>
+                                        <constraint firstItem="jSD-84-s7d" firstAttribute="centerY" secondItem="DfL-gq-RkT" secondAttribute="centerY" id="5yj-BE-cWG"/>
+                                        <constraint firstItem="sRw-vb-xt0" firstAttribute="centerY" secondItem="DfL-gq-RkT" secondAttribute="centerY" id="C2J-b2-awA"/>
+                                        <constraint firstItem="jSD-84-s7d" firstAttribute="top" secondItem="DfL-gq-RkT" secondAttribute="topMargin" constant="10" id="IDa-cz-sFO"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="jSD-84-s7d" secondAttribute="bottom" constant="10" id="K35-sM-ydi"/>
+                                        <constraint firstItem="sRw-vb-xt0" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="jSD-84-s7d" secondAttribute="trailing" constant="8" symbolic="YES" id="Oya-hH-cNL"/>
+                                        <constraint firstAttribute="trailing" secondItem="sRw-vb-xt0" secondAttribute="trailing" constant="19" id="Rm7-b8-cY2"/>
+                                        <constraint firstItem="jSD-84-s7d" firstAttribute="leading" secondItem="DfL-gq-RkT" secondAttribute="leadingMargin" id="qnO-00-eCO"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="cityLabel" destination="4W8-Aw-B45" id="80u-sW-EwW"/>
+                                    <outlet property="currentTimeLabel" destination="sRw-vb-xt0" id="Pm1-FK-LfW"/>
+                                    <outlet property="dayDifferenceLabel" destination="YMf-jd-frS" id="V6V-0z-D8i"/>
+                                    <outlet property="timeZoneLabel" destination="XpX-zr-6PA" id="gs6-aC-Rsa"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -113,7 +175,7 @@
             </objects>
             <point key="canvasLocation" x="1975.36231884058" y="110.49107142857143"/>
         </scene>
-        <!--Hello-->
+        <!--Map Background Controller-->
         <scene sceneID="ajO-y5-Fkt">
             <objects>
                 <viewController id="4Rb-sx-shu" customClass="MapBackgroundController" customModule="WorldTok" customModuleProvider="target" sceneMemberID="viewController">
@@ -121,7 +183,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" zoomEnabled="NO" rotateEnabled="NO" showsUserLocation="YES" showsBuildings="NO" showsCompass="NO" translatesAutoresizingMaskIntoConstraints="NO" id="77A-wA-7cN">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" pitchEnabled="NO" showsBuildings="NO" showsPointsOfInterest="NO" translatesAutoresizingMaskIntoConstraints="NO" id="77A-wA-7cN">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <connections>
                                     <outlet property="delegate" destination="4Rb-sx-shu" id="t3t-AO-r1P"/>
@@ -137,7 +199,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="aZe-Mx-FGO"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Hello" id="Mp2-dL-7FK">
+                    <navigationItem key="navigationItem" id="Mp2-dL-7FK">
                         <barButtonItem key="leftBarButtonItem" title="Done" style="done" id="tdM-kv-stQ">
                             <connections>
                                 <action selector="dismissVc:" destination="4Rb-sx-shu" id="klN-ZJ-mo3"/>
@@ -204,63 +266,67 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Vfq-0k-KPV">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="350"/>
-                            </mapView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="49e-oA-CcD">
-                                <rect key="frame" x="47" y="611" width="320" height="251"/>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ylL-AZ-40O">
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </view>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="XU1-eD-pqe">
+                                <rect key="frame" x="32" y="140" width="350" height="516.5"/>
                                 <subviews>
-                                    <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="WEy-u4-bEs">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="216"/>
-                                    </datePicker>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BAX-4i-14z">
-                                        <rect key="frame" x="100.5" y="221" width="119" height="30"/>
-                                        <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="15"/>
-                                        <state key="normal" title="Set Notification"/>
-                                        <connections>
-                                            <action selector="setNotification:" destination="AYO-d8-ol8" eventType="touchUpInside" id="O7D-RF-WQ2"/>
-                                        </connections>
-                                    </button>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MtI-jL-vi8" customClass="AnimationView" customModule="Lottie">
+                                        <rect key="frame" x="0.0" y="0.0" width="350" height="350"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="350" id="0dQ-o9-Ooj"/>
+                                            <constraint firstAttribute="width" constant="350" id="xGL-DE-qUj"/>
+                                        </constraints>
+                                    </view>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="ofv-wA-KGd">
+                                        <rect key="frame" x="45" y="358" width="260.5" height="158.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="05:12 PM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fG7-LG-85V">
+                                                <rect key="frame" x="0.0" y="0.0" width="260.5" height="72"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="60"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mumbai" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gSW-Kh-ZZS">
+                                                <rect key="frame" x="71" y="80" width="118" height="40.5"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="34"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BAX-4i-14z">
+                                                <rect key="frame" x="70.5" y="128.5" width="119" height="30"/>
+                                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="15"/>
+                                                <state key="normal" title="Set Notification"/>
+                                                <connections>
+                                                    <action selector="setNotification:" destination="AYO-d8-ol8" eventType="touchUpInside" id="O7D-RF-WQ2"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
                             </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="ofv-wA-KGd">
-                                <rect key="frame" x="77" y="388" width="260.5" height="120.5"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="05:12 PM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fG7-LG-85V">
-                                        <rect key="frame" x="0.0" y="0.0" width="260.5" height="72"/>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="60"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mumbai" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gSW-Kh-ZZS">
-                                        <rect key="frame" x="71" y="80" width="118" height="40.5"/>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="34"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="49e-oA-CcD">
+                                <rect key="frame" x="47" y="626" width="119" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="ofv-wA-KGd" firstAttribute="centerY" secondItem="3EK-9G-V6A" secondAttribute="centerY" id="ELs-8A-8eW"/>
-                            <constraint firstItem="Vfq-0k-KPV" firstAttribute="leading" secondItem="wBk-nX-Owo" secondAttribute="leading" id="IeN-Ir-7ug"/>
-                            <constraint firstItem="Vfq-0k-KPV" firstAttribute="trailing" secondItem="wBk-nX-Owo" secondAttribute="trailing" id="K8y-5a-bAQ"/>
-                            <constraint firstItem="ofv-wA-KGd" firstAttribute="top" secondItem="Vfq-0k-KPV" secondAttribute="bottom" constant="38" id="Ysq-lE-OxS"/>
-                            <constraint firstItem="Vfq-0k-KPV" firstAttribute="top" secondItem="3EK-9G-V6A" secondAttribute="top" id="bmn-76-U4J"/>
-                            <constraint firstItem="49e-oA-CcD" firstAttribute="bottom" secondItem="wBk-nX-Owo" secondAttribute="bottom" id="eil-Ze-KK9"/>
-                            <constraint firstItem="wBk-nX-Owo" firstAttribute="trailing" secondItem="49e-oA-CcD" secondAttribute="trailing" constant="47" id="hGK-gj-8tE"/>
-                            <constraint firstItem="ofv-wA-KGd" firstAttribute="centerX" secondItem="3EK-9G-V6A" secondAttribute="centerX" id="kK3-bG-Ssq"/>
-                            <constraint firstItem="49e-oA-CcD" firstAttribute="leading" secondItem="wBk-nX-Owo" secondAttribute="leading" constant="47" id="pbR-CJ-1gQ"/>
+                            <constraint firstItem="XU1-eD-pqe" firstAttribute="top" secondItem="wBk-nX-Owo" secondAttribute="top" id="0ig-fR-2V8"/>
+                            <constraint firstItem="XU1-eD-pqe" firstAttribute="leading" secondItem="wBk-nX-Owo" secondAttribute="leading" constant="32" id="HM3-Id-n96"/>
+                            <constraint firstItem="XU1-eD-pqe" firstAttribute="centerX" secondItem="3EK-9G-V6A" secondAttribute="centerX" id="q6F-Bv-VAt"/>
+                            <constraint firstItem="wBk-nX-Owo" firstAttribute="trailing" secondItem="XU1-eD-pqe" secondAttribute="trailing" constant="32" id="zpD-iD-OcW"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="wBk-nX-Owo"/>
                     </view>
                     <navigationItem key="navigationItem" id="iS3-hW-hy1"/>
                     <connections>
                         <outlet property="cityLabel" destination="gSW-Kh-ZZS" id="2ug-nZ-CYO"/>
-                        <outlet property="mapView" destination="Vfq-0k-KPV" id="db4-OZ-ZVQ"/>
                         <outlet property="timeLabel" destination="fG7-LG-85V" id="3VW-Hd-6iE"/>
-                        <outlet property="timePicker" destination="WEy-u4-bEs" id="MdS-W6-Ley"/>
+                        <outlet property="topAnimationView" destination="MtI-jL-vi8" id="Flz-7W-oCz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZYO-I1-mNK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -272,8 +338,8 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="hQE-oD-igI" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="PRT-qt-6Xi">
-                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="PRT-qt-6Xi">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" systemColor="secondarySystemGroupedBackgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </navigationBar>

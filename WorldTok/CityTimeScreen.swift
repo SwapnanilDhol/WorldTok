@@ -8,60 +8,72 @@
 
 import UIKit
 import MapKit
+import Lottie
 
 
+var globalIndex = 0
 class CityTimeScreen: UIViewController, MKMapViewDelegate{
 
     @IBOutlet weak var cityLabel: UILabel!
-    @IBOutlet weak var timePicker: UIDatePicker!
-    @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var timeLabel: UILabel!
-    var timer = Timer()
+    @IBOutlet weak var topAnimationView : LottieView!
     
+    var realTimeComp = DateComponents()
+    var timer = Timer()
+
     let notificationGenerator = UINotificationFeedbackGenerator()
     let feedbackGenerator = UIImpactFeedbackGenerator()
-    let blurEffect = UIBlurEffect(style: .dark)
+    let center = UNUserNotificationCenter.current()
+    let pickerView = UIDatePicker(frame: CGRect(x: 0, y: 0, width: 250, height: 300))
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         navigationController?.navigationBar.backgroundColor = .clear
-        let blurredEffectView = UIVisualEffectView(effect: blurEffect)
-        blurredEffectView.frame = mapView.bounds
-       // view.addSubview(blurredEffectView)
-        
+        print(finalListOfTimes[globalIndex], cities[globalIndex])
+        cityLabel.text = cities[globalIndex]
+        pickerView.addTarget(self, action: #selector(valueDidChange), for: .valueChanged)
         
         
         timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(setTime), userInfo: nil, repeats: true)
         RunLoop.current.add(timer, forMode: .common)
-        self.timePicker.datePickerMode = .time
-        self.timePicker.timeZone = TimeZone(identifier: "Europe/Paris")
-        mapView.alpha = 0.5
-        
-        
-        setupMapAnnotation()
-        
-    }
-    
 
-    
-    func setupMapAnnotation()
-    {
-        let london = MKPointAnnotation()
-        let coordianteSpan = MKCoordinateSpan(latitudeDelta: 100,longitudeDelta: 100)
-        let coordinateRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 19.0760, longitude: 72.8777), span: coordianteSpan)
-        london.title = "Mumbai"
-        london.coordinate = CLLocationCoordinate2D(latitude: 19.0760, longitude: 72.8777)
-        self.mapView.setRegion(coordinateRegion, animated: true)
-        mapView.addAnnotation(london)
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        setupLottie()
+    }
+    @objc func valueDidChange()
+    {
+        let pd = self.pickerView.date
+        let calender = Calendar.current
+        realTimeComp = calender.dateComponents([.day,.hour, .minute], from: pd)
+        print(realTimeComp)
+    }
+    
+    func setupLottie()
+    {
+        let animationView = AnimationView(name: "2222-slow-clock")
+        animationView.frame = topAnimationView.bounds
+        animationView.center = self.topAnimationView.center
+            
+        animationView.loopMode = .autoReverse
+        animationView.contentMode = .scaleAspectFit
+        animationView.animationSpeed = 1.0
+        
+        topAnimationView.addSubview(animationView)
+        
+            animationView.play()
+    }
+
     
     
     @objc func setTime()
     {
         timeLabel.text = getTime()
-        feedbackGenerator.impactOccurred(intensity: 0.4)
+       // feedbackGenerator.impactOccurred(intensity: 0.4)
         
     }
     override func viewDidDisappear(_ animated: Bool) {
@@ -72,46 +84,49 @@ class CityTimeScreen: UIViewController, MKMapViewDelegate{
     func getTime() -> String
     {
         var timeString = ""
-        
-        if cityLabel.text != ""
-        {
+
             let formatter = DateFormatter()
-            formatter.timeStyle = .long
-            formatter.timeZone = TimeZone(identifier: "Europe/Paris")
+            formatter.timeStyle = .short
+            formatter.timeZone = TimeZone(identifier: finalListOfTimes[globalIndex])
             
             let timeNow = Date()
             timeString = formatter.string(from: timeNow)
-              
-        }
-        let time = timeString.strstr(needle: "M",beforeNeedle: true)
-       
-        
-        timeString = time!
-        
-        return timeString + "M"
+
+        return timeString
     }
     
     @IBAction func setNotification(_ sender: Any) {
+
+        let vc = UIViewController()
+        vc.preferredContentSize = CGSize(width: 250,height: 300)
+        
+        
+        
+        
+        pickerView.datePickerMode = .dateAndTime
+        
+        
+        vc.view.addSubview(pickerView)
+        
+        
+        let editRadiusAlert = UIAlertController(title: "At what time?", message: "", preferredStyle: UIAlertController.Style.alert)
+        editRadiusAlert.setValue(vc, forKey: "contentViewController")
+        editRadiusAlert.addAction(UIAlertAction(title: "Set Notification", style: .default, handler: { (_) in
+
+            self.setNotificationWith(givenTimeZone: TimeZone(identifier: finalListOfTimes[globalIndex])!, cityName: cities[globalIndex],date: self.realTimeComp.day! ,hour: self.realTimeComp.hour!, minute: self.realTimeComp.minute! )
+            
+        }))
+        editRadiusAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        self.present(editRadiusAlert, animated: true)
+
         notificationGenerator.notificationOccurred(.success)
+
     }
     
 }
 
-extension CityTimeScreen
+extension CityTimeScreen: UIPickerViewDelegate
 {
-    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        guard annotation is MKPointAnnotation else { return nil }
-
-        let identifier = "Annotation"
-        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
-
-        if annotationView == nil {
-            annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
-            annotationView!.canShowCallout = true
-        } else {
-            annotationView!.annotation = annotation
-        }
-
-        return annotationView
-    }
+    
 }
+

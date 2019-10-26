@@ -8,15 +8,16 @@
 import UIKit
 import MapKit
 
-var finalListOfTimes = ["Asia/Hong_Kong"]
-var cities = ["Hong Kong"]
+var finalListOfTimes = ["Europe/Paris"]
+var cities = ["Paris, Europe"]
 
 class HomeScreen: UITableViewController {
     
     let reuseIdentifier  = "timeCell"
     let generator = UIImpactFeedbackGenerator()
     let timer = Timer()
-    
+    var favTimeZone = UserDefaults.standard.value(forKey: "favTimeZone") as? String ?? ""
+    var favCity = UserDefaults.standard.value(forKey: "favCity") as? String ?? ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,27 +58,91 @@ class HomeScreen: UITableViewController {
     
     // MARK: - Table view data source
     
-    override func numberOfSections(in tableView: UITableView) -> Int { 1 }
+    override func numberOfSections(in tableView: UITableView) -> Int {
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { finalListOfTimes.count }
+        if favTimeZone != ""
+        {
+            return 2
+        }
+        else
+        {
+            return 1
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        if favTimeZone != ""
+        {
+            switch section
+            {
+            case 0:
+                return 1
+            case 1:
+                return finalListOfTimes.count
+            default:
+                break
+            }
+        }
+        else
+        {
+            return finalListOfTimes.count
+        }
+        return 0
+    }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "timeCell", for: indexPath) as! TimeTableViewCell
         
+        if favTimeZone == ""
+        {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "timeCell", for: indexPath) as! TimeTableViewCell
         cell.cityLabel.text = cities[indexPath.row]
         cell.timeZoneLabel.text = finalListOfTimes[indexPath.row]
         cell.dayDifferenceLabel.text = "Loading"
-        
         return cell
+        }
+        else
+        {
+            if indexPath.section == 0 {
+            let favCell = tableView.dequeueReusableCell(withIdentifier: "favCell", for: indexPath) as! TimeTableViewCell
+            favCell.cityLabel.text = favCity
+            favCell.timeZoneLabel.text = favTimeZone
+            favCell.dayDifferenceLabel.text = "Loading"
+                return favCell
+            }
+            else
+            {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "timeCell", for: indexPath) as! TimeTableViewCell
+                cell.cityLabel.text = cities[indexPath.row]
+                cell.timeZoneLabel.text = finalListOfTimes[indexPath.row]
+                cell.dayDifferenceLabel.text = "Loading"
+                return cell
+            }
+        }
+        
+        
         
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        globalIndex = indexPath.row
         self.performSegue(withIdentifier: "showTimeSegue", sender: self)
        // self.performSegue(withIdentifier: "searchSegue", sender: self)
         generator.impactOccurred()
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+   
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        
+        if (favCity != "")
+        {
+            if (section == 0)
+            {
+                return "Favourite City"
+            }
+        }
+        return nil
     }
     
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool { true }
