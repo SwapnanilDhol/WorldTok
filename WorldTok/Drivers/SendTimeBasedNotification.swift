@@ -13,15 +13,21 @@ import UserNotifications
 
 extension CityTimeScreen
 {
-    func setNotificationWith(givenTimeZone: TimeZone, cityName: String, date: Int, hour: Int, minute: Int)
+    func setNotificationWith(givenTimeZone: TimeZone,message: String, cityName: String, date: Int, hour: Int, minute: Int)
     {
         let center = UNUserNotificationCenter.current()
-
+        
         let content = UNMutableNotificationContent()
-        content.title = "Alert for \(cityName)"
+        
+        if message != ""
+        {
+            content.title = message
+        }
+        else
+        {content.title = "Alert for \(cityName)"}
         content.body = "It is now \(hour):\(minute) at \(cityName)"
         content.sound = .default
-
+        
         //MARK: Testing!!
         
         let calendar = Calendar.current
@@ -29,14 +35,29 @@ extension CityTimeScreen
         print("Time Zone set")
         let trigger = UNCalendarNotificationTrigger(dateMatching: testDate, repeats: false)
         print(trigger)
-
+        
         let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
         center.add(request) { (error) in
             if error == nil
             {
-                print("Notification Set")
-                print(request.content.body)
+                //MARK: Notification has been set
+                
                 self.notificationGenerator.notificationOccurred(.success)
+                
+                UNUserNotificationCenter.current().getPendingNotificationRequests { (requests) in
+                    
+                    let count = requests.count
+                    DispatchQueue.main.async {
+                        if let tabItems = self.tabBarController?.tabBar.items {
+                            // In this case we want to modify the badge number of the third tab:
+                            let tabItem = tabItems[1]
+                            tabItem.badgeValue = String(count)
+                        }
+                    }
+                    
+                }
+                
+                
             }
             else
             {
@@ -48,13 +69,13 @@ extension CityTimeScreen
     func fetchTimeFor(givenTimeZone: TimeZone) -> String
     {
         var timeString = ""
-       
-            let formatter = DateFormatter()
-            formatter.timeStyle = .short
-            formatter.timeZone = givenTimeZone
-            let timeNow = Date()
-            timeString = formatter.string(from: timeNow)
-   print(timeString)
+        
+        let formatter = DateFormatter()
+        formatter.timeStyle = .short
+        formatter.timeZone = givenTimeZone
+        let timeNow = Date()
+        timeString = formatter.string(from: timeNow)
+        print(timeString)
         return timeString
     }
 }

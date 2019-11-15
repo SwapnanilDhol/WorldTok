@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		3F1D122C7FBC05EED995D7A1 /* Pods_WorldTok.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4C1C5AA9C5654799EF13E7A /* Pods_WorldTok.framework */; };
+		4410EF3D237F18BD005739F9 /* NotificationsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4410EF3C237F18BD005739F9 /* NotificationsTableViewController.swift */; };
+		447AFB1623656CBF0031C96D /* HomeSelectTableRowExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447AFB1523656CBF0031C96D /* HomeSelectTableRowExtension.swift */; };
 		4496DC182358B36000AF1456 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4496DC172358B36000AF1456 /* AppDelegate.swift */; };
 		4496DC1F2358B36000AF1456 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4496DC1D2358B36000AF1456 /* Main.storyboard */; };
 		4496DC212358B36400AF1456 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4496DC202358B36400AF1456 /* Assets.xcassets */; };
@@ -17,7 +19,6 @@
 		4496DC302358D41400AF1456 /* ContextMenuExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4496DC2F2358D41400AF1456 /* ContextMenuExtension.swift */; };
 		4496DC362359BF7500AF1456 /* CityTimeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4496DC352359BF7500AF1456 /* CityTimeScreen.swift */; };
 		449A6878236492AA00ADD9EB /* SendTimeBasedNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449A6877236492AA00ADD9EB /* SendTimeBasedNotification.swift */; };
-		449A68A12364E94400ADD9EB /* 2222-slow-clock.json in Resources */ = {isa = PBXBuildFile; fileRef = 449A68A02364E94300ADD9EB /* 2222-slow-clock.json */; };
 		44A240FD235B92E8002E8783 /* UserDefaultsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A240FC235B92E8002E8783 /* UserDefaultsExtension.swift */; };
 		44A24102235CE34D002E8783 /* MapBackgroundViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A24101235CE34D002E8783 /* MapBackgroundViewController.swift */; };
 		44A24104235CE39F002E8783 /* LocationSearchTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A24103235CE39F002E8783 /* LocationSearchTable.swift */; };
@@ -38,6 +39,9 @@
 
 /* Begin PBXFileReference section */
 		1D98B57D13F204D9DE032AD9 /* Pods-WorldTok.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WorldTok.release.xcconfig"; path = "Target Support Files/Pods-WorldTok/Pods-WorldTok.release.xcconfig"; sourceTree = "<group>"; };
+		4410EF3C237F18BD005739F9 /* NotificationsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsTableViewController.swift; sourceTree = "<group>"; };
+		447AFB1523656CBF0031C96D /* HomeSelectTableRowExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSelectTableRowExtension.swift; sourceTree = "<group>"; };
+		447AFB172366E4C40031C96D /* WorldTok.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WorldTok.entitlements; sourceTree = "<group>"; };
 		4496DC142358B36000AF1456 /* WorldTok.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WorldTok.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4496DC172358B36000AF1456 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4496DC1E2358B36000AF1456 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -49,7 +53,6 @@
 		4496DC2F2358D41400AF1456 /* ContextMenuExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContextMenuExtension.swift; sourceTree = "<group>"; };
 		4496DC352359BF7500AF1456 /* CityTimeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityTimeScreen.swift; sourceTree = "<group>"; };
 		449A6877236492AA00ADD9EB /* SendTimeBasedNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendTimeBasedNotification.swift; sourceTree = "<group>"; };
-		449A68A02364E94300ADD9EB /* 2222-slow-clock.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "2222-slow-clock.json"; sourceTree = "<group>"; };
 		44A240FC235B92E8002E8783 /* UserDefaultsExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsExtension.swift; sourceTree = "<group>"; };
 		44A24101235CE34D002E8783 /* MapBackgroundViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapBackgroundViewController.swift; sourceTree = "<group>"; };
 		44A24103235CE39F002E8783 /* LocationSearchTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchTable.swift; sourceTree = "<group>"; };
@@ -69,6 +72,55 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4410EF3B237F18A7005739F9 /* Notifications */ = {
+			isa = PBXGroup;
+			children = (
+				4410EF3C237F18BD005739F9 /* NotificationsTableViewController.swift */,
+			);
+			path = Notifications;
+			sourceTree = "<group>";
+		};
+		4410EF3E237F1E09005739F9 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				447AFB1523656CBF0031C96D /* HomeSelectTableRowExtension.swift */,
+				4496DC2B2358B4B900AF1456 /* HomeScreen.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		4410EF3F237F1E12005739F9 /* Drivers */ = {
+			isa = PBXGroup;
+			children = (
+				449A6877236492AA00ADD9EB /* SendTimeBasedNotification.swift */,
+			);
+			path = Drivers;
+			sourceTree = "<group>";
+		};
+		4410EF40237F1E1E005739F9 /* Delegates */ = {
+			isa = PBXGroup;
+			children = (
+				4496DC172358B36000AF1456 /* AppDelegate.swift */,
+			);
+			path = Delegates;
+			sourceTree = "<group>";
+		};
+		4410EF41237F1E2A005739F9 /* Entitlements */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Entitlements;
+			sourceTree = "<group>";
+		};
+		4410EF42237F1E36005739F9 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				4496DC222358B36400AF1456 /* LaunchScreen.storyboard */,
+				4496DC1D2358B36000AF1456 /* Main.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
 		4496DC0B2358B36000AF1456 = {
 			isa = PBXGroup;
 			children = (
@@ -92,17 +144,18 @@
 		4496DC162358B36000AF1456 /* WorldTok */ = {
 			isa = PBXGroup;
 			children = (
-				449A689F2364E93800ADD9EB /* Files */,
+				4410EF42237F1E36005739F9 /* Storyboards */,
+				4410EF41237F1E2A005739F9 /* Entitlements */,
+				4410EF40237F1E1E005739F9 /* Delegates */,
+				4410EF3F237F1E12005739F9 /* Drivers */,
+				4410EF3E237F1E09005739F9 /* Home */,
 				44A24100235CE1C4002E8783 /* SearchControllers */,
+				4410EF3B237F18A7005739F9 /* Notifications */,
 				4496DC5A235A393A00AF1456 /* Models */,
-				4496DC172358B36000AF1456 /* AppDelegate.swift */,
-				4496DC2B2358B4B900AF1456 /* HomeScreen.swift */,
 				4496DC352359BF7500AF1456 /* CityTimeScreen.swift */,
-				4496DC1D2358B36000AF1456 /* Main.storyboard */,
+				447AFB172366E4C40031C96D /* WorldTok.entitlements */,
 				4496DC202358B36400AF1456 /* Assets.xcassets */,
-				4496DC222358B36400AF1456 /* LaunchScreen.storyboard */,
 				4496DC252358B36400AF1456 /* Info.plist */,
-				449A6877236492AA00ADD9EB /* SendTimeBasedNotification.swift */,
 			);
 			path = WorldTok;
 			sourceTree = "<group>";
@@ -113,14 +166,6 @@
 				44A240FC235B92E8002E8783 /* UserDefaultsExtension.swift */,
 			);
 			path = Models;
-			sourceTree = "<group>";
-		};
-		449A689F2364E93800ADD9EB /* Files */ = {
-			isa = PBXGroup;
-			children = (
-				449A68A02364E94300ADD9EB /* 2222-slow-clock.json */,
-			);
-			path = Files;
 			sourceTree = "<group>";
 		};
 		44A24100235CE1C4002E8783 /* SearchControllers */ = {
@@ -213,7 +258,6 @@
 				4496DC242358B36400AF1456 /* LaunchScreen.storyboard in Resources */,
 				4496DC212358B36400AF1456 /* Assets.xcassets in Resources */,
 				4496DC1F2358B36000AF1456 /* Main.storyboard in Resources */,
-				449A68A12364E94400ADD9EB /* 2222-slow-clock.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -266,8 +310,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4410EF3D237F18BD005739F9 /* NotificationsTableViewController.swift in Sources */,
 				44A24102235CE34D002E8783 /* MapBackgroundViewController.swift in Sources */,
 				449A6878236492AA00ADD9EB /* SendTimeBasedNotification.swift in Sources */,
+				447AFB1623656CBF0031C96D /* HomeSelectTableRowExtension.swift in Sources */,
 				4496DC302358D41400AF1456 /* ContextMenuExtension.swift in Sources */,
 				4496DC2C2358B4B900AF1456 /* HomeScreen.swift in Sources */,
 				44A24104235CE39F002E8783 /* LocationSearchTable.swift in Sources */,
@@ -419,7 +465,9 @@
 			baseConfigurationReference = 90BFA9E29A36F7863AAB21B6 /* Pods-WorldTok.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = WorldTok/WorldTok.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = YES;
 				DEVELOPMENT_TEAM = AE68R986VS;
 				INFOPLIST_FILE = WorldTok/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -429,6 +477,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.SwapnanilDhol.WorldTok;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -439,7 +488,9 @@
 			baseConfigurationReference = 1D98B57D13F204D9DE032AD9 /* Pods-WorldTok.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = WorldTok/WorldTok.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = YES;
 				DEVELOPMENT_TEAM = AE68R986VS;
 				INFOPLIST_FILE = WorldTok/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -449,6 +500,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.SwapnanilDhol.WorldTok;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

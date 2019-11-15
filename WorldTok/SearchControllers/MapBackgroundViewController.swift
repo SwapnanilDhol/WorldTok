@@ -17,13 +17,15 @@ protocol HandleMapSearch {
 }
 
 class MapBackgroundController: UIViewController, UIGestureRecognizerDelegate {
+
     
     @IBOutlet weak var mapView : MKMapView!
-
+    
     let locationManager = CLLocationManager()
     var resultSearchController:UISearchController? = nil
     var selectedPin:MKPlacemark? = nil
     let notificationGenerator = UINotificationFeedbackGenerator()
+    let generator = UIImpactFeedbackGenerator()
     var locationCoordinate = CLLocationCoordinate2D(latitude: 0, longitude: 0)
     
     override func viewDidLoad() {
@@ -48,8 +50,6 @@ class MapBackgroundController: UIViewController, UIGestureRecognizerDelegate {
         searchBar.sizeToFit()
         searchBar.placeholder = "Search for places"
         navigationItem.searchController = resultSearchController
-        
-        
         resultSearchController?.hidesNavigationBarDuringPresentation = false
         resultSearchController?.obscuresBackgroundDuringPresentation = true
         definesPresentationContext = true
@@ -60,25 +60,25 @@ class MapBackgroundController: UIViewController, UIGestureRecognizerDelegate {
     @IBAction func revealRegionDetailsWithLongPressOnMap(sender: UILongPressGestureRecognizer) {
         if sender.state != UIGestureRecognizer.State.began { return }
         let touchLocation = sender.location(in: mapView)
-         locationCoordinate = mapView.convert(touchLocation, toCoordinateFrom: mapView)
+        locationCoordinate = mapView.convert(touchLocation, toCoordinateFrom: mapView)
         addAnnotation(location: locationCoordinate)
         
-        notificationGenerator.notificationOccurred(.success)
+        generator.impactOccurred()
     }
     
     @IBAction func dismissVc(_ sender: Any) {
-       
+        
         dismissAll()
     }
     
     @objc func dismissAll()
     {
         self.dismiss(animated: true, completion: {
-                   self.presentingViewController?.dismiss(animated: true, completion: nil)
-               })
+            self.presentingViewController?.dismiss(animated: true, completion: nil)
+        })
     }
     
-
+    
 }
 
 extension MapBackgroundController : CLLocationManagerDelegate
@@ -92,17 +92,17 @@ extension MapBackgroundController : CLLocationManagerDelegate
     
     
     
-  func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        
     }
     
     func addAnnotation(location: CLLocationCoordinate2D){
-            let annotation = MKPointAnnotation()
-            annotation.coordinate = location
-            annotation.title = "Dropped Pin"
-            annotation.subtitle = "Select this?"
-            self.mapView.addAnnotation(annotation)
-            self.mapView.showAnnotations([annotation], animated: true)
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = location
+        annotation.title = "Dropped Pin"
+        annotation.subtitle = "Select this?"
+        self.mapView.addAnnotation(annotation)
+        self.mapView.showAnnotations([annotation], animated: true)
     }
     
     
@@ -128,7 +128,7 @@ extension MapBackgroundController: HandleMapSearch {
         annotation.coordinate = placemark.coordinate
         annotation.title = placemark.name
         if let city = placemark.locality,
-        let state = placemark.administrativeArea {
+            let state = placemark.administrativeArea {
             annotation.subtitle = "\(city) \(state)"
         }
         mapView.addAnnotation(annotation)
@@ -142,7 +142,7 @@ extension MapBackgroundController: HandleMapSearch {
 extension MapBackgroundController : MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView?{
         if annotation is MKUserLocation {
-    
+            
             return nil
         }
         let reuseId = "pin"
@@ -170,40 +170,50 @@ extension MapBackgroundController : MKMapViewDelegate {
 extension MapBackgroundController {
     
     func convertLatLongToAddress(latitude:Double,longitude:Double){
-
-          let geoCoder = CLGeocoder()
-          let location = CLLocation(latitude: latitude, longitude: longitude)
-          geoCoder.reverseGeocodeLocation(location, completionHandler: { (placemarks, error) -> Void in
-
-              // Place details
-              var placeMark: CLPlacemark!
-              placeMark = placemarks?[0]
-              
-              if let timeZone = placeMark.timeZone
-              {
-                 let formatter = DateFormatter()
-                  formatter.timeStyle = .long
-                  formatter.timeZone = timeZone
-
-                  let timeNow = Date()
+        
+        let geoCoder = CLGeocoder()
+        let location = CLLocation(latitude: latitude, longitude: longitude)
+        geoCoder.reverseGeocodeLocation(location, completionHandler: { (placemarks, error) -> Void in
+            
+            // Place details
+            var placeMark: CLPlacemark!
+            placeMark = placemarks?[0]
+            
+            if let timeZone = placeMark.timeZone
+            {
+                let formatter = DateFormatter()
+                formatter.timeStyle = .long
+                formatter.timeZone = timeZone
+                
+                let timeNow = Date()
                 _ = formatter.string(from: timeNow)
-                  
+                
                 let ac = UIAlertController(title: "Do you want to add this?", message: "Do you want to add \((placeMark.administrativeArea) ?? "Unknown Area") who is following \(placeMark.timeZone ?? timeZone)", preferredStyle: .alert)
                 ac.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (_) in
                     let tzString : String = "\(timeZone)"
                     let editedTime = tzString.replacingOccurrences(of: " (current)", with: "")
                     finalListOfTimes.append(editedTime.replacingOccurrences(of: " (fixed)", with: ""))
                     cities.append((placeMark.administrativeArea ?? "Unknown") + ", " + (placeMark.country ?? "Unknown"))
+                    savedLong.append(longitude)
+                    savedLat.append(latitude)
+                    
+                    
+                    //MARK: Set Details to UserDefaults
+                    
+                    UserDefaults.standard.set(finalListOfTimes, forKey: "finalListOfTimes")
+                    UserDefaults.standard.set(cities, forKey: "cities")
+                    UserDefaults.standard.set(savedLong, forKey: "savedLong")
+                    UserDefaults.standard.set(savedLat, forKey: "savedLat")
                     
                     NotificationCenter.default.post(name: .init("dismissParent"), object: nil)
                 }))
                 ac.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
                 self.present(ac, animated: true, completion: nil)
-                  
-              }
-          })
-
-      }
+                
+            }
+        })
+        
+    }
 }
 
 

@@ -10,12 +10,11 @@ import UIKit
 import MapKit
 
 class LocationSearchTable: UITableViewController {
-    
 
+    
     var matchingItems:[MKMapItem] = []
     var mapView: MKMapView? = nil
     var handleMapSearchDelegate:HandleMapSearch? = nil
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,32 +25,32 @@ class LocationSearchTable: UITableViewController {
     override func viewDidAppear(_ animated: Bool) {
         tableView.tableFooterView = UIView()
     }
-
+    
 }
 
 extension LocationSearchTable : UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
-
+        
         guard let mapView = mapView,
-               let searchBarText = searchController.searchBar.text else { return }
+            let searchBarText = searchController.searchBar.text else { return }
         let request = MKLocalSearch.Request()
-           request.naturalLanguageQuery = searchBarText
-           request.region = mapView.region
-           let search = MKLocalSearch(request: request)
+        request.naturalLanguageQuery = searchBarText
+        request.region = mapView.region
+        let search = MKLocalSearch(request: request)
         search.start { response, _ in
-               guard let response = response else {
-                   return
-               }
-               self.matchingItems = response.mapItems
-               self.tableView.reloadData()
-
-    }
+            guard let response = response else {
+                return
+            }
+            self.matchingItems = response.mapItems
+            self.tableView.reloadData()
+            
+        }
     }
     
-
+    
     func updateSearchResultsForSearchController(searchController: UISearchController) {
         
-}
+    }
     
     
     func parseAddress(selectedItem:MKPlacemark) -> String {
@@ -80,21 +79,21 @@ extension LocationSearchTable : UISearchResultsUpdating {
     }
     
     func convertLatLongToAddress(latitude:Double,longitude:Double){
-
+        
         let geoCoder = CLGeocoder()
         let location = CLLocation(latitude: latitude, longitude: longitude)
         geoCoder.reverseGeocodeLocation(location, completionHandler: { (placemarks, error) -> Void in
-
+            
             // Place details
             var placeMark: CLPlacemark!
             placeMark = placemarks?[0]
             
             if let timeZone = placeMark.timeZone
             {
-               let formatter = DateFormatter()
+                let formatter = DateFormatter()
                 formatter.timeStyle = .long
                 formatter.timeZone = timeZone
-
+                
                 let timeNow = Date()
                 let timeString = formatter.string(from: timeNow)
                 print(timeString)
@@ -102,23 +101,32 @@ extension LocationSearchTable : UISearchResultsUpdating {
                 let editedTime = tzString.replacingOccurrences(of: " (current)", with: "")
                 finalListOfTimes.append(editedTime.replacingOccurrences(of: " (fixed)", with: ""))
                 cities.append((placeMark.administrativeArea ?? "Unknown") + ", " + (placeMark.country ?? "Unknown"))
+                savedLong.append(longitude)
+                savedLat.append(latitude)
                 
-                 NotificationCenter.default.post(name: .init("dismissParent"), object: nil)
+                //MARK: Saving Values
+                
+                UserDefaults.standard.set(finalListOfTimes, forKey: "finalListOfTimes")
+                UserDefaults.standard.set(cities, forKey: "cities")
+                UserDefaults.standard.set(savedLong, forKey: "savedLong")
+                UserDefaults.standard.set(savedLat, forKey: "savedLat")
+                
+                NotificationCenter.default.post(name: .init("dismissParent"), object: nil)
             }
         })
-
+        
     }
-
+    
 }
 
 extension LocationSearchTable {
-
+    
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-         return matchingItems.count
+        return matchingItems.count
     }
-
-   
+    
+    
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell")!
@@ -132,7 +140,7 @@ extension LocationSearchTable {
         
         tableView.deselectRow(at: indexPath, animated: true)
         UINotificationFeedbackGenerator().notificationOccurred(.success)
-        getCoordinateFrom(address: matchingItems[indexPath.row].placemark.name ?? "Moscow, Russia") { (locationCoordinates, error) in
+        getCoordinateFrom(address: matchingItems[indexPath.row].placemark.name ?? "Chennai, India") { (locationCoordinates, error) in
             
             if error == nil
             {
@@ -141,19 +149,19 @@ extension LocationSearchTable {
             else
             {print(error?.localizedDescription)}
         }
-
+        
         self.dismiss(animated: true, completion: nil)
-       
+        
         
     }
     
     func getCoordinateFrom(address: String, completion: @escaping(_ coordinate: CLLocationCoordinate2D?, _ error: Error?) -> () ) {
-               CLGeocoder().geocodeAddressString(address) { completion($0?.first?.location?.coordinate, $1) }
-           }
-
+        CLGeocoder().geocodeAddressString(address) { completion($0?.first?.location?.coordinate, $1) }
+    }
+    
 }
 
 extension LocationSearchTable {
-
+    
 }
 

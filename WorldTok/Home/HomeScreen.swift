@@ -8,21 +8,39 @@
 import UIKit
 import MapKit
 
-var finalListOfTimes = ["Europe/Paris"]
-var cities = ["Paris, Europe"]
+
+
+var finalListOfTimes = UserDefaults.standard.value(forKey: "finalListOfTimes") as? [String] ?? []
+var cities = UserDefaults.standard.value(forKey: "cities") as? [String] ?? []
+var savedLocation = UserDefaults.standard.value(forKey: "savedLocation") as? [CLLocationCoordinate2D] ?? []
+var savedLat = UserDefaults.standard.value(forKey: "savedLat") as? [Double] ?? []
+var savedLong = UserDefaults.standard.value(forKey: "savedLong") as? [Double] ?? []
+
 
 class HomeScreen: UITableViewController {
     
+    //MARK: Variables
+    
+    let userDefaults = UserDefaults.standard
     let reuseIdentifier  = "timeCell"
     let generator = UIImpactFeedbackGenerator()
     let timer = Timer()
     var favTimeZone = UserDefaults.standard.value(forKey: "favTimeZone") as? String ?? ""
     var favCity = UserDefaults.standard.value(forKey: "favCity") as? String ?? ""
+    let notificationGenerator = UINotificationFeedbackGenerator()
+    let feedbackGenerator = UIImpactFeedbackGenerator()
+    let center = UNUserNotificationCenter.current()
+    let pickerView = UIDatePicker(frame: CGRect(x: 0, y: 0, width: 250, height: 300))
+    var realTimeComp = DateComponents()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         requestNotificationPermission()
+        checkNotifAndSetBadge()
 
+        
+        
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Edit", style: UIBarButtonItem.Style.plain, target: self, action: #selector(editButtonPressed))
         
         self.refreshControl?.addTarget(self, action: #selector(refresh), for: UIControl.Event.valueChanged)
@@ -33,24 +51,66 @@ class HomeScreen: UITableViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         
+        finalListOfTimes = UserDefaults.standard.value(forKey: "finalListOfTimes") as? [String] ?? []
+        cities = UserDefaults.standard.value(forKey: "cities") as? [String] ?? []
+        savedLat = UserDefaults.standard.value(forKey: "savedLat") as? [Double] ?? []
+        savedLong = UserDefaults.standard.value(forKey: "savedLong") as? [Double] ?? []
+        
         tableView.reloadData()
         tableView.tableFooterView = UIView()
-
+        
+        
+    }
+    
+    func checkNotifAndSetBadge()
+    {
+        
+        UNUserNotificationCenter.current().getPendingNotificationRequests { (requests) in
+            
+            let count = requests.count
+            DispatchQueue.main.async {
+                if let tabItems = self.tabBarController?.tabBar.items {
+                    // In this case we want to modify the badge number of the third tab:
+                    let tabItem = tabItems[1]
+                    if count != 0
+                    {tabItem.badgeValue = String(count)}
+                    else {tabItem.badgeValue = nil}
+                    
+                }
+            }
+            
+        }
     }
     
     @objc func reloadTableView()
     {
+        print(finalListOfTimes, cities, savedLong)
         tableView.reloadData()
+
     }
     
     @objc func refresh(sender:AnyObject)
     {
+        
+        //Refreshing all the values
         generator.impactOccurred()
-
         self.tableView.reloadData()
         self.refreshControl?.endRefreshing()
-    }
+        
+        
+        UNUserNotificationCenter.current().getPendingNotificationRequests(completionHandler: { (requests) in
 
+            for request in requests {
+                if requests.isEmpty == false
+                {
+                    print(request.content.body)
+                }
+                else
+                {print("No notifications available")}
+            }
+        })
+    }
+    
     
     @IBAction func searchButton(_ sender: UIBarButtonItem) {
         self.performSegue(withIdentifier: "searchSegue", sender: self)
@@ -59,7 +119,7 @@ class HomeScreen: UITableViewController {
     // MARK: - Table view data source
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-    
+        
         if favTimeZone != ""
         {
             return 2
@@ -96,19 +156,19 @@ class HomeScreen: UITableViewController {
         
         if favTimeZone == ""
         {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "timeCell", for: indexPath) as! TimeTableViewCell
-        cell.cityLabel.text = cities[indexPath.row]
-        cell.timeZoneLabel.text = finalListOfTimes[indexPath.row]
-        cell.dayDifferenceLabel.text = "Loading"
-        return cell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "timeCell", for: indexPath) as! TimeTableViewCell
+            cell.cityLabel.text = cities[indexPath.row]
+            cell.timeZoneLabel.text = finalListOfTimes[indexPath.row]
+            cell.dayDifferenceLabel.text = "Loading"
+            return cell
         }
         else
         {
             if indexPath.section == 0 {
-            let favCell = tableView.dequeueReusableCell(withIdentifier: "favCell", for: indexPath) as! TimeTableViewCell
-            favCell.cityLabel.text = favCity
-            favCell.timeZoneLabel.text = favTimeZone
-            favCell.dayDifferenceLabel.text = "Loading"
+                let favCell = tableView.dequeueReusableCell(withIdentifier: "favCell", for: indexPath) as! TimeTableViewCell
+                favCell.cityLabel.text = favCity
+                favCell.timeZoneLabel.text = favTimeZone
+                favCell.dayDifferenceLabel.text = "Loading"
                 return favCell
             }
             else
@@ -125,14 +185,8 @@ class HomeScreen: UITableViewController {
         
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        globalIndex = indexPath.row
-        self.performSegue(withIdentifier: "showTimeSegue", sender: self)
-       // self.performSegue(withIdentifier: "searchSegue", sender: self)
-        generator.impactOccurred()
-        tableView.deselectRow(at: indexPath, animated: true)
-    }
-   
+    
+    
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         
         if (favCity != "")
@@ -152,6 +206,8 @@ class HomeScreen: UITableViewController {
             
             finalListOfTimes.remove(at: indexPath.row)
             cities.remove(at: indexPath.row)
+            savedLat.remove(at: indexPath.row)
+            savedLong.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
             tableView.reloadData()
             
@@ -175,15 +231,28 @@ class HomeScreen: UITableViewController {
 extension HomeScreen : UIAdaptivePresentationControllerDelegate {
     public override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
-      if segue.identifier == "searchSegue" {
-        segue.destination.presentationController?.delegate = self;
-      }
-}
+        if segue.identifier == "searchSegue" {
+            segue.destination.presentationController?.delegate = self;
+        }
+    }
     public func presentationControllerDidDismiss(
-      _ presentationController: UIPresentationController)
+        _ presentationController: UIPresentationController)
     {
-         print(finalListOfTimes)
+        
+        //Refreshing all the values
+//
+//              finalListOfTimes = UserDefaults.standard.value(forKey: "finalListOfTimes") as? [String] ?? []
+//              cities = UserDefaults.standard.value(forKey: "cities") as? [String] ?? []
+//              savedLat = UserDefaults.standard.value(forKey: "savedLat") as? [Double] ?? []
+//              savedLong = UserDefaults.standard.value(forKey: "savedLong") as? [Double] ?? []
+              
+        
+        print(finalListOfTimes)
         NotificationCenter.default.post(name: .init("startTimer"), object: nil)
+        
+        
+        
+        
         self.tableView.reloadData()
     }
     
